@@ -26,12 +26,13 @@ $(document).ready(function() {
       // check if they match
       if($('.flipped').eq(0).data('card') == $('.flipped').eq(1).data('card')) {
         alert('YAY!');
+        //remove from field
       }
       else {
-        alert('NA!')
+        alert('NA!');
+        //flip back over
       }
     }
-
   });
 });
 
