@@ -14,9 +14,24 @@ cards[11] = "images/six-spades.png";
 
 cards = shuffle(cards);
 
+$('IMG').each(function(counter) {
+  $(this).data('card',cards[counter]);
+});
+
 $(document).ready(function() {
   $('IMG').click(function() {
-    $(this).attr('src','images/ace-spades.png');
+    $(this).attr('src',$(this).data('card'));
+    $(this).addClass('flipped');
+    if($('.flipped').length > 1) {
+      // check if they match
+      if($('.flipped').eq(0).data('card') == $('.flipped').eq(1).data('card')) {
+        alert('YAY!');
+      }
+      else {
+        alert('NA!')
+      }
+    }
+
   });
 });
 
