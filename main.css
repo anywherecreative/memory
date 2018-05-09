@@ -1,0 +1,43 @@
+BODY {
+  overflow:hidden;
+}
+@keyframes winPulse {
+    from {border-color:#040;}
+    to {border-color:#0f0;}
+}
+
+@keyframes suckerPulse {
+    from {border-color:#400;}
+    to {border-color:#f00;}
+}
+
+#field IMG {
+  padding:5px;
+}
+
+.match {
+  border:3px #0f0 solid;
+  border-radius: 7px;
+
+  animation-name:winPulse;
+	animation-duration:.1s;
+	animation-iteration-count: 6;
+}
+
+.sucker {
+  border:3px #f00 solid;
+  border-radius: 7px;
+
+  animation-name:suckerPulse;
+  animation-duration:.1s;
+  animation-iteration-count: 6;
+}
+
+#field > DIV {
+  height:170px;
+}
+#yay {
+  position:absolute;
+  top:50px;
+  left:20%;
+}

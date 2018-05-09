@@ -12,29 +12,47 @@ cards[9] = "images/five-spades.png";
 cards[10] = "images/six-spades.png";
 cards[11] = "images/six-spades.png";
 
-cards = shuffle(cards);
+// cards = shuffle(cards);
 
-$('IMG').each(function(counter) {
+$('#field IMG').each(function(counter) {
   $(this).data('card',cards[counter]);
+  $(this).attr('src',$(this).data('card'));
 });
+setTimeout(function() {
+  $('#field IMG').attr('src','images/back.png');
+},2000);
 
 $(document).ready(function() {
-  $('IMG').click(function() {
+  $('#field IMG').click(function() {
     $(this).attr('src',$(this).data('card'));
     $(this).addClass('flipped');
     if($('.flipped').length > 1) {
       // check if they match
       if($('.flipped').eq(0).data('card') == $('.flipped').eq(1).data('card')) {
-        alert('YAY!');
-        //remove from field
+        $('.flipped').addClass('match');
+        setTimeout(function() {
+          $('.flipped').hide();
+          $('.flipped').removeClass('flipped');
+          checkWin();
+        },600);
       }
       else {
-        alert('NA!');
-        //flip back over
+          $('.flipped').addClass('sucker');
+        setTimeout(function() {
+          $('.flipped').removeClass('sucker');
+          $('.flipped').removeClass('flipped');
+          $('IMG').attr('src','images/back.png');
+        },600);
       }
     }
   });
 });
+
+function checkWin() {
+  if($('#field IMG:visible').length == 0) {
+    alert('YOU ARE THE WINNER! YAY!');
+  }
+}
 
 function shuffle(array) {
   var currentIndex = array.length, temporaryValue, randomIndex;
