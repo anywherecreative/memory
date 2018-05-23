@@ -12,18 +12,13 @@ cards[9] = "images/five-spades.png";
 cards[10] = "images/six-spades.png";
 cards[11] = "images/six-spades.png";
 
-// cards = shuffle(cards);
-
-$('#field IMG').each(function(counter) {
-  $(this).data('card',cards[counter]);
-  $(this).attr('src',$(this).data('card'));
-});
-setTimeout(function() {
-  $('#field IMG').attr('src','images/back.png');
-},2000);
+resetField();
 
 $(document).ready(function() {
   $('#field IMG').click(function() {
+    if($('.flipped').length > 1) {
+      return false;
+    }
     $(this).attr('src',$(this).data('card'));
     $(this).addClass('flipped');
     if($('.flipped').length > 1) {
@@ -31,7 +26,8 @@ $(document).ready(function() {
       if($('.flipped').eq(0).data('card') == $('.flipped').eq(1).data('card')) {
         $('.flipped').addClass('match');
         setTimeout(function() {
-          $('.flipped').hide();
+          $('.flipped').attr('src','images/empty.png');
+          $('.flipped').removeClass('match');
           $('.flipped').removeClass('flipped');
           checkWin();
         },600);
@@ -41,7 +37,7 @@ $(document).ready(function() {
         setTimeout(function() {
           $('.flipped').removeClass('sucker');
           $('.flipped').removeClass('flipped');
-          $('IMG').attr('src','images/back.png');
+          $('#field IMG').attr('src','images/back.png');
         },600);
       }
     }
@@ -50,8 +46,34 @@ $(document).ready(function() {
 
 function checkWin() {
   if($('#field IMG:visible').length == 0) {
-    alert('YOU ARE THE WINNER! YAY!');
+    $('#yay').show();
+    setTimeout(function() {
+      if(confirm('YOU ARE THE WINNER! YAY! Do you want to play again?')) {
+        resetField();
+      }
+    },1000);
   }
+}
+
+function resetField() {
+  $('#yay').hide();
+  // $("#field IMG").show();
+  $('.flipped').removeClass('flipped');
+  $('#field IMG').attr('src','images/back.png');
+  $('#field IMG').removeClass('match');
+
+  //shuffle the cards
+  cards = shuffle(cards);
+
+  //show the order of the cards before we hide them again
+  $('#field IMG').each(function(counter) {
+    $(this).data('card',cards[counter]);
+    $(this).attr('src',$(this).data('card'));
+  });
+
+  setTimeout(function() {
+    $('#field IMG').attr('src','images/back.png');
+  },2000);
 }
 
 function shuffle(array) {

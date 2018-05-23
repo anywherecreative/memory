@@ -40,4 +40,9 @@ BODY {
   position:absolute;
   top:50px;
   left:20%;
+  display:none;
+}
+
+IMG[src='images/empty.png'] {
+  opacity:0.5;
 }
