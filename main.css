@@ -38,11 +38,15 @@ BODY {
 }
 #yay {
   position:absolute;
-  top:50px;
+  bottom:0;
   left:20%;
   display:none;
 }
 
 IMG[src='images/empty.png'] {
   opacity:0.5;
+}
+
+.confetti {
+  background:url('images/confetti.gif');
 }

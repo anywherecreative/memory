@@ -1,3 +1,4 @@
+var score = 0;
 var cards = new Array();
 cards[0] = "images/ace-spades.png";
 cards[1] = "images/ace-spades.png";
@@ -37,7 +38,7 @@ $(document).ready(function() {
         setTimeout(function() {
           $('.flipped').removeClass('sucker');
           $('.flipped').removeClass('flipped');
-          $('#field IMG').attr('src','images/back.png');
+          $('#field IMG').not('[src="images/empty.png"]').attr('src','images/back.png');
         },600);
       }
     }
@@ -45,8 +46,9 @@ $(document).ready(function() {
 });
 
 function checkWin() {
-  if($('#field IMG:visible').length == 0) {
+  if($('#field IMG[src!="images/empty.png"]:visible').length == 0) {
     $('#yay').show();
+    $('BODY').addClass('confetti');
     setTimeout(function() {
       if(confirm('YOU ARE THE WINNER! YAY! Do you want to play again?')) {
         resetField();
@@ -56,6 +58,7 @@ function checkWin() {
 }
 
 function resetField() {
+  $('BODY').removeClass('confetti');
   $('#yay').hide();
   // $("#field IMG").show();
   $('.flipped').removeClass('flipped');
