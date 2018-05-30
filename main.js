@@ -49,6 +49,8 @@ function checkWin() {
   if($('#field IMG[src!="images/empty.png"]:visible').length == 0) {
     $('#yay').show();
     $('BODY').addClass('confetti');
+    score++;
+    $('#score').text(score);
     setTimeout(function() {
       if(confirm('YOU ARE THE WINNER! YAY! Do you want to play again?')) {
         resetField();
@@ -66,7 +68,7 @@ function resetField() {
   $('#field IMG').removeClass('match');
 
   //shuffle the cards
-  cards = shuffle(cards);
+  // cards = shuffle(cards);
 
   //show the order of the cards before we hide them again
   $('#field IMG').each(function(counter) {
