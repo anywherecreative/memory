@@ -16,6 +16,11 @@ cards[11] = "images/six-spades.png";
 resetField();
 
 $(document).ready(function() {
+  localStorage.name = prompt('what is thy name?')
+  if(localStorage.score != undefined) {
+    score = localStorage.score;
+    $('#score').text(score);
+  }
   $('#field IMG').click(function() {
     if($('.flipped').length > 1) {
       return false;
@@ -50,6 +55,7 @@ function checkWin() {
     $('#yay').show();
     $('BODY').addClass('confetti');
     score++;
+    localStorage.score = score;
     $('#score').text(score);
     setTimeout(function() {
       if(confirm('YOU ARE THE WINNER! YAY! Do you want to play again?')) {
